@@ -8,3 +8,15 @@ before_install:
 
 script:
   - docker run -e CI=true babosina/docker-react-class npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "docker-react-class"
+  env: "Dockerreactclass-env"
+  bucket_name: "elasticbeanstalk-us-east-2-518434592542"
+  bucket_path: "docker-react-class"
+  on:
+    branch: master
+  access_key_id: "$AWS_ACCESS_KEY"
+  secret_access_key: "$AWS_SECRET_KEY"
